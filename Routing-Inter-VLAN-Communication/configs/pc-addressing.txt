@@ -1,0 +1,35 @@
+# Example PC/server addressing
+# Subnet mask for every listed device: 255.255.255.0
+# Use unique IP addresses; do not assign the same address to two devices.
+
+HR-PC1
+  IPv4 address:    192.168.10.10
+  Subnet mask:     255.255.255.0
+  Default gateway: 192.168.10.1
+
+FINANCE-PC1
+  IPv4 address:    192.168.20.10
+  Subnet mask:     255.255.255.0
+  Default gateway: 192.168.20.1
+
+IT-PC1
+  IPv4 address:    192.168.30.10
+  Subnet mask:     255.255.255.0
+  Default gateway: 192.168.30.1
+
+SALES-PC1
+  IPv4 address:    192.168.40.10
+  Subnet mask:     255.255.255.0
+  Default gateway: 192.168.40.1
+
+MANAGEMENT-PC1
+  IPv4 address:    192.168.50.10
+  Subnet mask:     255.255.255.0
+  Default gateway: 192.168.50.1
+
+SERVER1
+  IPv4 address:    192.168.60.10
+  Subnet mask:     255.255.255.0
+  Default gateway: 192.168.60.1
+
+# In Packet Tracer: click device > Desktop > IP Configuration.

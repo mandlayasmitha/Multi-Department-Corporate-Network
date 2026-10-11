@@ -1,0 +1,35 @@
+! Access switch template - apply separately to each department switch.
+! Change VLAN_ID and DEPARTMENT below for each switch.
+! Example for HR: VLAN_ID=10, DEPARTMENT=HR
+! Example for Finance: VLAN_ID=20, DEPARTMENT=FINANCE
+! Assumption: G0/1 uplinks to the core switch; PCs connect to F0/1-F0/24.
+
+enable
+configure terminal
+hostname DEPARTMENT-SWITCH
+
+vlan VLAN_ID
+ name DEPARTMENT
+exit
+
+interface gigabitEthernet0/1
+ description TRUNK_TO_CORE_SWITCH
+ switchport mode trunk
+ switchport trunk allowed vlan VLAN_ID
+ no shutdown
+exit
+
+interface range fastEthernet0/1-24
+ description END_DEVICE_PORTS
+ switchport mode access
+ switchport access vlan VLAN_ID
+ spanning-tree portfast
+ no shutdown
+exit
+
+end
+copy running-config startup-config
+
+! Replace VLAN_ID and DEPARTMENT with actual values before entering commands.
+! Verification: show vlan brief
+! Verification: show interfaces trunk

@@ -1,0 +1,84 @@
+! Core switch configuration
+! Assumptions for a typical Cisco 2960-24TT:
+! G0/1 connects to router G0/0.
+! F0/1-F0/6 connect to access switches for VLANs 10,20,30,40,50,60 in that order.
+! Change ports to match your actual topology.
+
+enable
+configure terminal
+hostname CORE-SW1
+
+vlan 10
+ name HR
+exit
+vlan 20
+ name FINANCE
+exit
+vlan 30
+ name IT
+exit
+vlan 40
+ name SALES
+exit
+vlan 50
+ name MANAGEMENT
+exit
+vlan 60
+ name SERVERS
+exit
+
+interface gigabitEthernet0/1
+ description TRUNK_TO_CORPORATE_ROUTER
+ switchport mode trunk
+ switchport trunk allowed vlan 10,20,30,40,50,60
+ no shutdown
+exit
+
+interface fastEthernet0/1
+ description TRUNK_TO_HR_SWITCH
+ switchport mode trunk
+ switchport trunk allowed vlan 10
+ no shutdown
+exit
+
+interface fastEthernet0/2
+ description TRUNK_TO_FINANCE_SWITCH
+ switchport mode trunk
+ switchport trunk allowed vlan 20
+ no shutdown
+exit
+
+interface fastEthernet0/3
+ description TRUNK_TO_IT_SWITCH
+ switchport mode trunk
+ switchport trunk allowed vlan 30
+ no shutdown
+exit
+
+interface fastEthernet0/4
+ description TRUNK_TO_SALES_SWITCH
+ switchport mode trunk
+ switchport trunk allowed vlan 40
+ no shutdown
+exit
+
+interface fastEthernet0/5
+ description TRUNK_TO_MANAGEMENT_SWITCH
+ switchport mode trunk
+ switchport trunk allowed vlan 50
+ no shutdown
+exit
+
+interface fastEthernet0/6
+ description TRUNK_TO_SERVER_SWITCH
+ switchport mode trunk
+ switchport trunk allowed vlan 60
+ no shutdown
+exit
+
+end
+copy running-config startup-config
+
+! Verification:
+! show vlan brief
+! show interfaces trunk

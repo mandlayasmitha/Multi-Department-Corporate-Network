@@ -1,0 +1,57 @@
+! Router-on-a-Stick configuration
+! Assumption: Router GigabitEthernet0/0 connects to Core Switch GigabitEthernet0/1.
+! Adjust interface names to match your Packet Tracer router.
+
+enable
+configure terminal
+hostname CORPORATE-R1
+no ip domain-lookup
+
+interface gigabitEthernet0/0
+ description TRUNK_TO_CORE_SWITCH
+ no ip address
+ no shutdown
+ exit
+
+interface gigabitEthernet0/0.10
+ description HR_VLAN_10_GATEWAY
+ encapsulation dot1Q 10
+ ip address 192.168.10.1 255.255.255.0
+ exit
+
+interface gigabitEthernet0/0.20
+ description FINANCE_VLAN_20_GATEWAY
+ encapsulation dot1Q 20
+ ip address 192.168.20.1 255.255.255.0
+ exit
+
+interface gigabitEthernet0/0.30
+ description IT_VLAN_30_GATEWAY
+ encapsulation dot1Q 30
+ ip address 192.168.30.1 255.255.255.0
+ exit
+
+interface gigabitEthernet0/0.40
+ description SALES_VLAN_40_GATEWAY
+ encapsulation dot1Q 40
+ ip address 192.168.40.1 255.255.255.0
+ exit
+
+interface gigabitEthernet0/0.50
+ description MANAGEMENT_VLAN_50_GATEWAY
+ encapsulation dot1Q 50
+ ip address 192.168.50.1 255.255.255.0
+ exit
+
+interface gigabitEthernet0/0.60
+ description SERVERS_VLAN_60_GATEWAY
+ encapsulation dot1Q 60
+ ip address 192.168.60.1 255.255.255.0
+ exit
+
+end
+copy running-config startup-config
+
+! Verification:
+! show ip interface brief
+! show ip route
